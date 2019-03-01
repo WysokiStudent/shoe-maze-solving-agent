@@ -15,4 +15,6 @@ LaTeX: pdfLaTeX
 StripTrailingWhitespace: Yes
 LineEndingConversion: Windows
 
+BuildType: Makefile
+
 QuitChildProcessesOnExit: Yes
