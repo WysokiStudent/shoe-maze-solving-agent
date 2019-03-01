@@ -1,6 +1,6 @@
 # =======================================================================
 # Names:
-# Group Number: 
+# Group Number:
 # Assignment:
 # Date:
 # =======================================================================
@@ -11,13 +11,13 @@
 #    corresponding call to the "library ()" function
 # 3. Do not forget to comment on the code, especially those non-trivial commands
 #    (remember that part of the rating depends on the cleaning of the code)
-# 4. It is strongly recommended to test any implemented function in order to 
+# 4. It is strongly recommended to test any implemented function in order to
 #    check for its proper operation
 # =======================================================================
 # (This is a general code, you must adapt it)
 # =======================================================================
 
-# This function must return a list with the information needed to 
+# This function must return a list with the information needed to
 # solve the problem.
 # (Depending on the problem, it should receive or not parameters)
 initialize.problem = function(){
@@ -27,6 +27,7 @@ initialize.problem = function(){
   # problem$actions.possible = <Insert code here>
   # problem$name = <Insert code here>
   # problem$<aditional info> = <Insert code here>
+  problem$maze = matrix()
   return(problem)
 }
 
@@ -43,7 +44,7 @@ is.applicable = function (state,action,problem){
 # Must return the state resulting on applying the action over the state
 effect = function (state,action){
   result = state
-  # <insert code here in order to modify the resulting state> 
+  # <insert code here in order to modify the resulting state>
   return(result)
 }
 
@@ -54,14 +55,14 @@ effect = function (state,action){
 #   could be omited
 is.final.state = function (state, finalstate=NULL){
   result = TRUE
-  # <insert code here in order to modify the resulting state> 
+  # <insert code here in order to modify the resulting state>
   return(result)
 }
 
 # =======================================================================
 # Must print the state in console (in a legible way)
 to.string = function (state){
-  # <insert code here to print the state> 
+  # <insert code here to print the state>
 }
 
 # =======================================================================
