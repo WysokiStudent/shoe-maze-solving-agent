@@ -5,3 +5,14 @@ test_that("Is maze a matrix", {
   problem <- initialize.problem()
   expect_true(is.matrix(problem$kRedMaze))
 })
+
+
+test_that("Are kRedMaze states well defined", {
+  problem <- initialize.problem()
+
+  for (row in nrow(problem$kRedMaze)) {
+    for (column in ncol(problem$kRedMaze)) {
+      expect_true(is.logical(problem$kRedMaze[row][column]))
+    }
+  }
+})
