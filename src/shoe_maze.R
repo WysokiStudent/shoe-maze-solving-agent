@@ -27,7 +27,7 @@ initialize.problem = function(){
   # problem$actions.possible = <Insert code here>
   # problem$name = <Insert code here>
   # problem$<aditional info> = <Insert code here>
-  problem$kRedMaze = matrix()
+  problem$kRedMaze = matrix(FALSE, nrow=2, ncol=2)
   return(problem)
 }
 
