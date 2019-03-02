@@ -1,7 +1,7 @@
 library(testthat)
 source("../src/shoe_maze.R")
 
-test_that("Is maze a matrix", {
+test_that("Is kRedMaze a matrix", {
   problem <- initialize.problem()
   expect_true(is.matrix(problem$kRedMaze))
 })
