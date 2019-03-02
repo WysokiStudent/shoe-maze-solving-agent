@@ -1,3 +1,4 @@
+library(testthat)
 source("../src/shoe_maze.R")
 
 test_that("Is maze a matrix", {
