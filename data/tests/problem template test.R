@@ -1,5 +1,5 @@
 library(testthat)
-source("../src/shoe_maze.R")
+source("../../problems/problem template.R")
 
 test_that("Is kRedMaze a matrix", {
   problem <- initialize.problem()
