@@ -22,8 +22,6 @@ cat("\014")
 graphics.off()
 if (rstudioapi::isAvailable()) {
   setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-} else {
-  setwd("demos")
 }
 getwd()
 dir()
