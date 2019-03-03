@@ -1,6 +1,6 @@
 # =======================================================================
 # Names:
-# Group Number: 
+# Group Number:
 # Assignment:
 # Date:
 # =======================================================================
@@ -11,7 +11,7 @@
 #    corresponding call to the "library ()" function
 # 3. Do not forget to comment on the code, especially those non-trivial commands
 #    (remember that part of the rating depends on the cleaning of the code)
-# 4. It is strongly recommended to test any implemented function in order to 
+# 4. It is strongly recommended to test any implemented function in order to
 #    check for its proper operation
 # =======================================================================
 # (This is a general code, you must adapt it)
@@ -20,7 +20,11 @@
 rm(list=ls())
 cat("\014")
 graphics.off()
-setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+if (rstudioapi::isAvailable()) {
+  setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+} else {
+  setwd("demos")
+}
 getwd()
 dir()
 
@@ -28,10 +32,12 @@ dir()
 library(rstudioapi)
 library(ggplot2)
 library(gridExtra)
+library(testthat)
 
 # ADDITIONAL FUNCTIONS (add any used method/problem here)
-source("../problems/XXXXXXXXXX.R")
-source("../methods/YYYYYYYYYYY.R")
+source("../problems/problem template.R")
+source("../methods/Breadth First Search.R")
+source("../methods/Depth First Search.R")
 
 # And here, there are additional (needed) functions
 source("../methods/Expand Node.R")
@@ -39,14 +45,13 @@ source("../methods/Analyze Results.R")
 source("../methods/Plot Results.R")
 # =======================================================================
 # Check the proper operation of implemented function here!
-
-
+source("../data/run tests.R")
 
 # =======================================================================
 # Solving of the problem (you have to adapt it)
-problem   = initialize.problem("<ANY_PARAMETER_IF_NEEDED>")
-res1 = method.XXXX(problem,"<OTHER_PARAMETERS>")
-res2 = method.YYYY(problem,"<OTHER_PARAMETERS>")
+problem   = initialize.problem()
+res1 = Breadth.First.Search(problem)
+res2 = Depth.First.Search (problem)
 all = list(res1, res2)
 analyze.results(list(res1,res2),problem)
 
