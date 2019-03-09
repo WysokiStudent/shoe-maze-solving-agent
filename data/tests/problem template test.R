@@ -27,30 +27,15 @@ test_that("Are kMaze cells well defined", {
     }
 })
 
-test_that("Is initial state well defined", {
+test_that("Are initial and final states well defined", {
   problem <- initialize.problem()
 
-  expect_true(is.list(problem$state.initial))
+  for (state in list(problem$state.initial, problem$state.final)) {
+    expect_true(is.list(state))
 
-  expect_true(
-    problem$state.initial$row <= nrow(problem$kMaze) & problem$state.initial$row > 0
-  )
-  expect_true(
-    problem$state.initial$column <= ncol(problem$kMaze) &  problem$state.initial$column > 0
-  )
-})
-
-test_that("Is final state well defined", {
-  problem <- initialize.problem()
-
-  expect_true(is.list(problem$state.final))
-
-  expect_true(
-    problem$state.final$row <= nrow(problem$kMaze) & problem$state.final$row > 0
-  )
-  expect_true(
-    problem$state.final$column <= ncol(problem$kMaze) &  problem$state.final$column > 0
-  )
+    expect_true(state$row <= nrow(problem$kMaze) & state$row > 0)
+    expect_true(state$column <= ncol(problem$kMaze) &  state$column > 0)
+  }
 })
 
 test_that("Are possible actions well defined", {
