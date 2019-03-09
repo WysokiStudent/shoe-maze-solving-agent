@@ -52,3 +52,14 @@ test_that("Is final state well defined", {
     problem$state.final$column <= ncol(problem$kMaze) &  problem$state.final$column > 0
   )
 })
+
+test_that("Are possible actions well defined", {
+  problem <- initialize.problem()
+
+  expect_true(is.data.frame(problem$actions.possible))
+
+  expect_true(problem$actions.possible[1, ] == "up")
+  expect_true(problem$actions.possible[2, ] == "down")
+  expect_true(problem$actions.possible[3, ] == "left")
+  expect_true(problem$actions.possible[4, ] == "right")
+})
