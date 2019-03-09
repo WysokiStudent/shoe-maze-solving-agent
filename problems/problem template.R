@@ -22,7 +22,7 @@
 # (Depending on the problem, it should receive or not parameters)
 initialize.problem = function(){
   problem = list()
-  # problem$state.initial = <Insert code here>
+  problem$state.initial <- list(row = 2, column = 1)
   # problem$state.final   = <Insert code here or remove line if not needed>
   # problem$actions.possible = <Insert code here>
   # problem$name = <Insert code here>
