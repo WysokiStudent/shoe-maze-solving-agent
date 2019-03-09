@@ -2,7 +2,7 @@ RUN_TEST_DIR=data
 TEST_COMMAND=Rscript run\ tests.R
 
 MAIN_DIR=demos
-RUN_MAIN_COMMAND=Rscript main\ file\ template.R
+RUN_MAIN_COMMAND=Rscript main-shoe-maze.R
 
 .PHONY:all test run clean
 all: test run

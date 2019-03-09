@@ -33,7 +33,7 @@ library(gridExtra)
 library(testthat)
 
 # ADDITIONAL FUNCTIONS (add any used method/problem here)
-source("../problems/problem template.R")
+source("../problems/shoe-maze-problem.R")
 source("../methods/Breadth First Search.R")
 source("../methods/Depth First Search.R")
 
