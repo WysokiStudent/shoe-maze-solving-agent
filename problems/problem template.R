@@ -25,7 +25,7 @@ initialize.problem = function(){
   problem$state.initial <- list(row = 2, column = 1)
   problem$state.final <- list(row = 1, column = 2)
   problem$actions.possible <- data.frame(direction = c("up", "down", "left", "right"), stringsAsFactors = F)
-  # problem$name = <Insert code here>
+  problem$name = "shoe-maze-problem"
   # problem$<aditional info> = <Insert code here>
   kMazeCell <- list(isRed = TRUE, walls = list(
     north = FALSE, south = FALSE, east = FALSE, west = FALSE
