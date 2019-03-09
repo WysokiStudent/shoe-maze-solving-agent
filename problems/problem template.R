@@ -23,7 +23,7 @@
 initialize.problem = function(){
   problem = list()
   problem$state.initial <- list(row = 2, column = 1)
-  # problem$state.final   = <Insert code here or remove line if not needed>
+  problem$state.final <- list(row = 1, column = 2)
   # problem$actions.possible = <Insert code here>
   # problem$name = <Insert code here>
   # problem$<aditional info> = <Insert code here>
