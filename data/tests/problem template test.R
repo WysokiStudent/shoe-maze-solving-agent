@@ -35,3 +35,16 @@ test_that("Is initial state well defined", {
     problem$state.initial$column <= ncol(problem$kMaze) &  problem$state.initial$column > 0
   )
 })
+
+test_that("Is final state well defined", {
+  problem <- initialize.problem()
+
+  expect_true(is.list(problem$state.final))
+
+  expect_true(
+    problem$state.final$row <= nrow(problem$kMaze) & problem$state.final$row > 0
+  )
+  expect_true(
+    problem$state.final$column <= ncol(problem$kMaze) &  problem$state.final$column > 0
+  )
+})
