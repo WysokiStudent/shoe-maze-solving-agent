@@ -18,8 +18,12 @@ test_that("Are kMaze cells well defined", {
     for (c in ncol(problem$kMaze)) {
       expect_true(is.logical(problem$kMaze[r, c][[1]]$isRed))
       expect_true(is.list(problem$kMaze[r, c][[1]]$walls))
-      for (wall in problem$kMaze[r, c][[1]]$walls)
-        expect_true(is.logical(wall))
+
+      # This could be done in a loop but we wish to be explicit about the names
+      expect_true(is.logical(problem$kMaze[r, c][[1]]$walls$north))
+      expect_true(is.logical(problem$kMaze[r, c][[1]]$walls$south))
+      expect_true(is.logical(problem$kMaze[r, c][[1]]$walls$east))
+      expect_true(is.logical(problem$kMaze[r, c][[1]]$walls$west))
     }
 })
 
