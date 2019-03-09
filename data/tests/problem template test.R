@@ -22,3 +22,16 @@ test_that("Are kMaze cells well defined", {
         expect_true(is.logical(wall))
     }
 })
+
+test_that("Is initial state well defined", {
+  problem <- initialize.problem()
+
+  expect_true(is.list(problem$state.initial))
+
+  expect_true(
+    problem$state.initial$row <= nrow(problem$kMaze) & problem$state.initial$row > 0
+  )
+  expect_true(
+    problem$state.initial$column <= ncol(problem$kMaze) &  problem$state.initial$column > 0
+  )
+})
