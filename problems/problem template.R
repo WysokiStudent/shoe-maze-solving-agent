@@ -27,7 +27,11 @@ initialize.problem = function(){
   # problem$actions.possible = <Insert code here>
   # problem$name = <Insert code here>
   # problem$<aditional info> = <Insert code here>
-  problem$kMaze = matrix(FALSE, nrow=2, ncol=2)
+  kMazeCell <- list(isRed = TRUE, walls = list(
+    north = FALSE, south = FALSE, east = FALSE, west = FALSE
+  ))
+  problem$kMaze <- matrix(list(kMazeCell), nrow = 2, ncol = 2)
+  problem$kMaze[1, 1][[1]]$isRed = FALSE
   return(problem)
 }
 
