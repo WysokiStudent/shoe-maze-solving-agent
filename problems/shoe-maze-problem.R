@@ -101,9 +101,7 @@ effect <- function (state, action){
 # * In case the final state is stablished by a condition, second argument
 #   could be omited
 is.final.state = function (state, finalstate=NULL){
-  result = TRUE
-  # <insert code here in order to modify the resulting state>
-  return(result)
+  return(identical(state, finalstate))
 }
 
 # =======================================================================

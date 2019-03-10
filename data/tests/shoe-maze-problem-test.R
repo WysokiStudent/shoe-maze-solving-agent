@@ -97,3 +97,12 @@ test_that("Does 'effect' change state properly", {
   expected.state = list(row = 2, column = 3)
   expect_true(identical(effect(initial.state, "right"), expected.state))
 })
+
+test_that("Is 'is.final.state' well implemented", {
+  current.state = list(row = 2, column = 2)
+  final.state = list(row = 2, column =2)
+
+  expect_true(identical(current.state, final.state))
+  current.state$row = current.state$row - 1
+  expect_false(identical(current.state, final.state))
+})
