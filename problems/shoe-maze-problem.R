@@ -1,8 +1,8 @@
 # =======================================================================
-# Names:
-# Group Number:
-# Assignment:
-# Date:
+# Names: Aleksander Bobiński, Karolina Palka, Maciej Stokfisz
+# Group Number: Group I
+# Assignment: shoe-maze
+# Date: 10.03.2019
 # =======================================================================
 # 1. Be sure to include, with this template, any necessary files
 #    for execution, including datasets (problem.R, methodXXX.R, ...)
