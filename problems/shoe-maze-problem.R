@@ -22,13 +22,25 @@
 # (Depending on the problem, it should receive or not parameters)
 initialize.problem = function(csv.directory, rows, columns){
   problem = list()
-  problem$state.initial <- list(row = 7, column = 1)
-  problem$state.final <- list(row = 1, column = 7)
   problem$actions.possible <- data.frame(direction = c("up", "down", "left", "right"), stringsAsFactors = F)
   problem$name = "shoe-maze-problem"
   # problem$<aditional info> = <Insert code here>
   csv = read.csv(csv.directory, header = FALSE)
-  problem$kMaze <- matrix(mapply(function(x, n, s, w, e) list(list(isRed=x, walls=list(north=n, south=s, west=w, east=e))), csv[, 1], csv[, 2], csv[, 3], csv[, 4], csv[, 5]), nrow=rows, ncol=columns)
+  problem$kMaze <- matrix(
+    mapply(
+      function(isRed, north, south, west, east)
+        list(
+          list(
+            isRed=isRed,
+            walls=list(north=north, south=south, west=west, east=east)
+          )
+        ),
+      csv[, 1], csv[, 2], csv[, 3], csv[, 4], csv[, 5]
+    ),
+    nrow=rows, ncol=columns
+  )
+  problem$state.initial <- list(row = rows, column = 1)
+  problem$state.final <- list(row = 1, column = columns)
   return(problem)
 }
 
