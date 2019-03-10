@@ -2,17 +2,17 @@ library(testthat)
 source("../../problems/shoe-maze-problem.R")
 
 test_that("Is kMaze a matrix", {
-  problem <- initialize.problem()
+  problem <- initialize.problem("../../data/maze.csv", 7, 7)
   expect_true(is.matrix(problem$kMaze))
 })
 
 test_that("Is kMaze not empty", {
-  problem <- initialize.problem()
+  problem <- initialize.problem("../../data/maze.csv", 7, 7)
   expect_false(anyNA(problem$kMaze))
 })
 
 test_that("Are kMaze cells well defined", {
-  problem <- initialize.problem()
+  problem <- initialize.problem("../../data/maze.csv", 7, 7)
 
   for (r in nrow(problem$kMaze))
     for (c in ncol(problem$kMaze)) {
@@ -28,7 +28,7 @@ test_that("Are kMaze cells well defined", {
 })
 
 test_that("Are initial and final states well defined", {
-  problem <- initialize.problem()
+  problem <- initialize.problem("../../data/maze.csv", 7, 7)
 
   for (state in list(problem$state.initial, problem$state.final)) {
     expect_true(is.list(state))
@@ -39,7 +39,7 @@ test_that("Are initial and final states well defined", {
 })
 
 test_that("Are possible actions well defined", {
-  problem <- initialize.problem()
+  problem <- initialize.problem("../../data/maze.csv", 7, 7)
 
   expect_true(is.data.frame(problem$actions.possible))
 
@@ -50,7 +50,7 @@ test_that("Are possible actions well defined", {
 })
 
 test_that("Does 'is.applicable' check the conditions properly", {
- problem <- initialize.problem()
+ problem <- initialize.problem("../../data/maze.csv", 7, 7)
 
  kMazeCell <- problem$kMaze[1, 1][[1]]
  kMazeCell$isRed <- TRUE

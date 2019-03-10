@@ -20,18 +20,20 @@
 # This function must return a list with the information needed to
 # solve the problem.
 # (Depending on the problem, it should receive or not parameters)
-initialize.problem = function(){
+initialize.problem = function(csv.directory, rows, columns){
   problem = list()
   problem$state.initial <- list(row = 2, column = 1)
   problem$state.final <- list(row = 1, column = 2)
   problem$actions.possible <- data.frame(direction = c("up", "down", "left", "right"), stringsAsFactors = F)
   problem$name = "shoe-maze-problem"
   # problem$<aditional info> = <Insert code here>
-  kMazeCell <- list(isRed = TRUE, walls = list(
-    north = FALSE, south = FALSE, east = FALSE, west = FALSE
-  ))
-  problem$kMaze <- matrix(list(kMazeCell), nrow = 2, ncol = 2)
-  problem$kMaze[1, 1][[1]]$isRed = FALSE
+  csv = read.csv(csv.directory, header = FALSE)
+  problem$kMaze <- matrix(mapply(function(x, n, s, w, e) list(list(isRed=x, walls=list(north=n, south=s, west=w, east=e))), csv[, 1], csv[, 2], csv[, 3], csv[, 4], csv[, 5]), nrow=rows, ncol=columns)
+  #kMazeCell <- list(isRed = TRUE, walls = list(
+  #  north = FALSE, south = FALSE, east = FALSE, west = FALSE
+  #))
+  #problem$kMaze <- matrix(list(kMazeCell), nrow = 2, ncol = 2)
+  #problem$kMaze[1, 1][[1]]$isRed = FALSE
   return(problem)
 }
 

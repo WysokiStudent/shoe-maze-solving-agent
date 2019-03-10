@@ -47,7 +47,7 @@ source("../data/run tests.R")
 
 # =======================================================================
 # Solving of the problem (you have to adapt it)
-problem   = initialize.problem()
+problem   = initialize.problem("../data/maze.csv", 7, 7)
 res1 = Breadth.First.Search(problem)
 res2 = Depth.First.Search (problem)
 all = list(res1, res2)
