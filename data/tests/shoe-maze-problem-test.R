@@ -48,3 +48,21 @@ test_that("Are possible actions well defined", {
   expect_true(problem$actions.possible[3, ] == "left")
   expect_true(problem$actions.possible[4, ] == "right")
 })
+
+test_that("Does 'is.applicable' take into account color", {
+ problem <- initialize.problem()
+
+ kMazeCell <- problem$kMaze[1, 1]
+ kMazeCell$isRed <- TRUE
+ kMazeCell$walls <- lapply(kMazeCell$walls, function(x) FALSE)
+
+ problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
+ kState <- list(row=2, column=2)
+
+ for (direction in problem$actions.possible[, ])
+   expect_false(is.applicable(kState, direction, problem))
+
+ problem$kMaze[kState$row, kState$column][[1]]$isRed <- FALSE
+ for (direction in problem$actions.possible[, ])
+   expect_true(is.applicable(kState, direction, problem))
+})

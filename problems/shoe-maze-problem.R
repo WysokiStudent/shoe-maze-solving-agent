@@ -38,9 +38,26 @@ initialize.problem = function(){
 # =======================================================================
 # Must return TRUE or FALSE according with if the action can be done or not
 # over the specific state
-is.applicable = function (state,action,problem){
-  result = FALSE
-  # <insert code here in order to calculate result value>
+is.applicable <- function (state, action, problem){
+  result <- switch (action,
+    up = {
+      return (problem$kMaze[state$row, state$column][[1]]$isRed !=
+                problem$kMaze[state$row - 1, state$column][[1]]$isRed)
+    },
+    down = {
+      return (problem$kMaze[state$row, state$column][[1]]$isRed !=
+                problem$kMaze[state$row + 1, state$column][[1]]$isRed)
+    },
+    left = {
+      return (problem$kMaze[state$row, state$column][[1]]$isRed !=
+                problem$kMaze[state$row, state$column - 1][[1]]$isRed)
+    },
+    right = {
+      return (problem$kMaze[state$row, state$column][[1]]$isRed !=
+                problem$kMaze[state$row, state$column + 1][[1]]$isRed)
+    }
+  )
+
   return(result)
 }
 
