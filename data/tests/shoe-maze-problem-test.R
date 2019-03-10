@@ -61,7 +61,7 @@ test_that("Does 'is.applicable' check the conditions properly", {
  # No walls but wrong colors
  for (direction in problem$actions.possible[, ])
    expect_false(is.applicable(kState, direction, problem))
- 
+
  # Walls and wrong colors
  kMazeCell[[1]]$walls <- lapply(kMazeCell[[1]]$walls, function(x) {return (TRUE)})
  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
@@ -74,10 +74,26 @@ test_that("Does 'is.applicable' check the conditions properly", {
  problem$kMaze[kState$row, kState$column][[1]]$isRed <- FALSE
  for (direction in problem$actions.possible[, ])
    expect_true(is.applicable(kState, direction, problem))
- 
+
  # Walls and correct colors
  kMazeCell[[1]]$walls <- lapply(kMazeCell[[1]]$walls, function(x) {return (TRUE)})
  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
  for (direction in problem$actions.possible[, ])
    expect_false(is.applicable(kState, direction, problem))
+})
+
+test_that("Does 'effect' change state properly", {
+  initial.state = list(row = 2, column = 2)
+
+  expected.state = list(row = 1, column = 2)
+  expect_true(identical(effect(initial.state, "up"), expected.state))
+
+  expected.state = list(row = 3, column = 2)
+  expect_true(identical(effect(initial.state, "down"), expected.state))
+
+  expected.state = list(row = 2, column = 1)
+  expect_true(identical(effect(initial.state, "left"), expected.state))
+
+  expected.state = list(row = 2, column = 3)
+  expect_true(identical(effect(initial.state, "right"), expected.state))
 })

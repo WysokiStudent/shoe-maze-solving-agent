@@ -43,25 +43,25 @@ is.applicable <- function (state, action, problem){
   result <- switch (action,
     up = {
       return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
-                problem$kMaze[state$row - 1, state$column][[1]]$isRed) && 
+                problem$kMaze[state$row - 1, state$column][[1]]$isRed) &&
                 !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$north)
               )
     },
     down = {
       return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
-                problem$kMaze[state$row + 1, state$column][[1]]$isRed) && 
+                problem$kMaze[state$row + 1, state$column][[1]]$isRed) &&
                 !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$south)
               )
     },
     left = {
       return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
-                problem$kMaze[state$row, state$column - 1][[1]]$isRed) && 
+                problem$kMaze[state$row, state$column - 1][[1]]$isRed) &&
                 !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$west)
               )
     },
     right = {
       return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
-                problem$kMaze[state$row, state$column + 1][[1]]$isRed) && 
+                problem$kMaze[state$row, state$column + 1][[1]]$isRed) &&
                 !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$east)
               )
     }
@@ -72,15 +72,27 @@ is.applicable <- function (state, action, problem){
 
 # =======================================================================
 # Must return the state resulting on applying the action over the state
-effect = function (state,action){
-  result = state
+effect <- function (state, action){
   result <- switch (action,
       up = {
-        result$column = result$column + 1
+        state$row = state$row - 1
+        return (state)
+      },
+      down = {
+        state$row = state$row + 1
+        return (state)
+      },
+      left = {
+        state$column = state$column - 1
+        return (state)
+      },
+      right = {
+        state$column = state$column + 1
+        return (state)
       }
     )
-  print()
-  return(result)
+
+  return (result)
 }
 
 
