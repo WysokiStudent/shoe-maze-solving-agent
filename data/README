@@ -1,0 +1,2 @@
+The maze.csv file contains comma seperated values in the following format:
+isCellRed, hasNorthWall, hasSouthWall, hasWestWall, hasEastWall

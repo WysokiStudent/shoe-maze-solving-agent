@@ -6,7 +6,7 @@ list(row, column)
 The initial state is list(n, 1) and final state is list(1, m) where n and m are respectivly the height and width of the maze.
 
 The maze is a 2D matrix that holds lists inside. The structure of a matrix cell is the following:
-list(isRed = logical, walls=list(north=logical, south=logical, east=logical, west=logical))
+list(isRed = logical, walls=list(north=logical, south=logical, west=logical, east=logical))
 The overhead of storing copies of walls is minimal because the maze is constant and only one copy of it exists, however the increased clarity of the code in comparision to using 2 matrixes for storing walls (noth, east) is immense.
 
 Actions:
