@@ -22,8 +22,8 @@
 # (Depending on the problem, it should receive or not parameters)
 initialize.problem = function(csv.directory, rows, columns){
   problem = list()
-  problem$state.initial <- list(row = 2, column = 1)
-  problem$state.final <- list(row = 1, column = 2)
+  problem$state.initial <- list(row = 7, column = 1)
+  problem$state.final <- list(row = 1, column = 7)
   problem$actions.possible <- data.frame(direction = c("up", "down", "left", "right"), stringsAsFactors = F)
   problem$name = "shoe-maze-problem"
   # problem$<aditional info> = <Insert code here>
