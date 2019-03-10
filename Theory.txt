@@ -7,7 +7,7 @@ The initial state is list(n, 1) and final state is list(1, m) where n and m are 
 
 The maze is a 2D matrix that holds lists inside. The structure of a matrix cell is the following:
 list(isRed = logical, walls=list(north=logical, south=logical, east=logical, west=logical))
-The overhead of storing copies of walls is minimal because the maze is constant and only one copy of it exists, however the increased clarity of the code in comparision to using 2 matrixes for storing walls (noth, east) is immense. Additionaly the edges of the matrix have walls so no additional checks than the ones regarding walls and colors should be needed but the prerequisite that about the edge of the matrix is still noted in the conditions.
+The overhead of storing copies of walls is minimal because the maze is constant and only one copy of it exists, however the increased clarity of the code in comparision to using 2 matrixes for storing walls (noth, east) is immense.
 
 Actions:
 A condition that is true for all actions is: the next cell must have a different color than the current one.

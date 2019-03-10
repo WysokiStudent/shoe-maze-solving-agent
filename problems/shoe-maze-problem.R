@@ -42,27 +42,31 @@ is.applicable <- function (state, action, problem){
   # print(problem$kMaze[state$row, state$column][[1]][[1]])
   result <- switch (action,
     up = {
+      if (state$row == 1) return (FALSE)
       return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
                 problem$kMaze[state$row - 1, state$column][[1]]$isRed) &&
-                !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$north)
+                !(problem$kMaze[state$row, state$column][[1]]$walls$north)
               )
     },
     down = {
+      if (state$row + 1 > nrow(problem$kMaze)) return (FALSE)
       return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
                 problem$kMaze[state$row + 1, state$column][[1]]$isRed) &&
-                !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$south)
+                !(problem$kMaze[state$row, state$column][[1]]$walls$south)
               )
     },
     left = {
+      if (state$column == 1) return (FALSE)
       return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
                 problem$kMaze[state$row, state$column - 1][[1]]$isRed) &&
-                !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$west)
+                !(problem$kMaze[state$row, state$column][[1]]$walls$west)
               )
     },
     right = {
+      if (state$column + 1 > ncol(problem$kMaze)) return (FALSE)
       return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
                 problem$kMaze[state$row, state$column + 1][[1]]$isRed) &&
-                !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$east)
+                !(problem$kMaze[state$row, state$column][[1]]$walls$east)
               )
     }
   )
