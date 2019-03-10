@@ -1,0 +1,48 @@
+State:
+The state is defined as a row and column inside a matrix that represents the maze. The matrix is not part of the state as it is constant and hece it is better to declare it inside the problem.
+
+list(row, column)
+
+The initial state is list(n, 1) and final state is list(1, m) where n and m are respectivly the height and width of the maze.
+
+The maze is a 2D matrix that holds lists inside. The structure of a matrix cell is the following:
+list(isRed = logical, walls=list(north=logical, south=logical, east=logical, west=logical))
+The overhead of storing copies of walls is minimal because the maze is constant and only one copy of it exists, however the increased clarity of the code in comparision to using 2 matrixes for storing walls (noth, east) is immense.
+
+Actions:
+A condition that is true for all actions is: the next cell must have a different color than the current one.
+
+For all: color in next cell != color in current cell
+For all: cost = 1
+"up":
+  Conditions:
+  No north wall in current cell (we assume that for each wall in a cell there exists a mirror wall in the adjoined cell)
+  This is not the top row of the maze matrix.
+
+  effect:
+  row -= 1
+"down"
+  Conditions:
+  No south wall
+  Not the bottom row of the maze matrix
+
+  effect:
+  row += 1
+"left"
+  Conditions:
+  No west wall
+  Not the most left column of the maze matrix
+
+  effect:
+  column -= 1
+"right"
+  Conditions:
+  No east wall
+  Not the most right column of the maze matrix
+
+  effect:
+  column += 1
+
+Max depth (m): infinite (loops are possible)
+Optimal depth (d): unkown/infinite
+Branching factor (b): 4 (maximum branching factor, in this problem it depends on the colors and walls too much to be able to compute a reliable average)
