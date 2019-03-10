@@ -1,18 +1,22 @@
 library(testthat)
 source("../../problems/shoe-maze-problem.R")
 
+GetProblem <- function() {
+  return (initialize.problem("../../data/maze.csv", 7, 7))
+}
+
 test_that("Is kMaze a matrix", {
-  problem <- initialize.problem("../../data/maze.csv", 7, 7)
+  problem <- GetProblem()
   expect_true(is.matrix(problem$kMaze))
 })
 
 test_that("Is kMaze not empty", {
-  problem <- initialize.problem("../../data/maze.csv", 7, 7)
+  problem <- GetProblem()
   expect_false(anyNA(problem$kMaze))
 })
 
 test_that("Are kMaze cells well defined", {
-  problem <- initialize.problem("../../data/maze.csv", 7, 7)
+  problem <- GetProblem()
 
   for (r in nrow(problem$kMaze))
     for (c in ncol(problem$kMaze)) {
@@ -28,7 +32,7 @@ test_that("Are kMaze cells well defined", {
 })
 
 test_that("Are initial and final states well defined", {
-  problem <- initialize.problem("../../data/maze.csv", 7, 7)
+  problem <- GetProblem()
 
   for (state in list(problem$state.initial, problem$state.final)) {
     expect_true(is.list(state))
@@ -39,7 +43,7 @@ test_that("Are initial and final states well defined", {
 })
 
 test_that("Are possible actions well defined", {
-  problem <- initialize.problem("../../data/maze.csv", 7, 7)
+  problem <- GetProblem()
 
   expect_true(is.data.frame(problem$actions.possible))
 
@@ -50,36 +54,36 @@ test_that("Are possible actions well defined", {
 })
 
 test_that("Does 'is.applicable' check the conditions properly", {
- problem <- initialize.problem("../../data/maze.csv", 7, 7)
+  problem <- GetProblem()
 
- kMazeCell <- problem$kMaze[1, 1][[1]]
- kMazeCell$isRed <- TRUE
+  kMazeCell <- problem$kMaze[1, 1][[1]]
+  kMazeCell$isRed <- TRUE
 
- # No walls but wrong colors
- kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (FALSE)})
- problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
- kState <- list(row=2, column=2)
- for (direction in problem$actions.possible[, ])
-   expect_false(is.applicable(kState, direction, problem))
+  # No walls but wrong colors
+  kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (FALSE)})
+  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
+  kState <- list(row=2, column=2)
+  for (direction in problem$actions.possible[, ])
+    expect_false(is.applicable(kState, direction, problem))
 
- # Walls and wrong colors
- kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (TRUE)})
- problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
- for (direction in problem$actions.possible[, ])
-   expect_false(is.applicable(kState, direction, problem))
+  # Walls and wrong colors
+  kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (TRUE)})
+  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
+  for (direction in problem$actions.possible[, ])
+    expect_false(is.applicable(kState, direction, problem))
 
- # No walls and correct colors
- kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (FALSE)})
- problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
- problem$kMaze[kState$row, kState$column][[1]]$isRed <- FALSE
- for (direction in problem$actions.possible[, ])
-   expect_true(is.applicable(kState, direction, problem))
+  # No walls and correct colors
+  kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (FALSE)})
+  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
+  problem$kMaze[kState$row, kState$column][[1]]$isRed <- FALSE
+  for (direction in problem$actions.possible[, ])
+    expect_true(is.applicable(kState, direction, problem))
 
- # Walls and correct colors
- kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (TRUE)})
- problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
- for (direction in problem$actions.possible[, ])
-   expect_false(is.applicable(kState, direction, problem))
+  # Walls and correct colors
+  kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (TRUE)})
+  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
+  for (direction in problem$actions.possible[, ])
+    expect_false(is.applicable(kState, direction, problem))
 })
 
 test_that("Does 'effect' change state properly", {
