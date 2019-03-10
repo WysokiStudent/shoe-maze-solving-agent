@@ -39,22 +39,31 @@ initialize.problem = function(){
 # Must return TRUE or FALSE according with if the action can be done or not
 # over the specific state
 is.applicable <- function (state, action, problem){
+  # print(problem$kMaze[state$row, state$column][[1]][[1]])
   result <- switch (action,
     up = {
-      return (problem$kMaze[state$row, state$column][[1]]$isRed !=
-                problem$kMaze[state$row - 1, state$column][[1]]$isRed)
+      return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
+                problem$kMaze[state$row - 1, state$column][[1]]$isRed) && 
+                !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$north)
+              )
     },
     down = {
-      return (problem$kMaze[state$row, state$column][[1]]$isRed !=
-                problem$kMaze[state$row + 1, state$column][[1]]$isRed)
+      return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
+                problem$kMaze[state$row + 1, state$column][[1]]$isRed) && 
+                !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$south)
+              )
     },
     left = {
-      return (problem$kMaze[state$row, state$column][[1]]$isRed !=
-                problem$kMaze[state$row, state$column - 1][[1]]$isRed)
+      return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
+                problem$kMaze[state$row, state$column - 1][[1]]$isRed) && 
+                !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$west)
+              )
     },
     right = {
-      return (problem$kMaze[state$row, state$column][[1]]$isRed !=
-                problem$kMaze[state$row, state$column + 1][[1]]$isRed)
+      return ((problem$kMaze[state$row, state$column][[1]]$isRed !=
+                problem$kMaze[state$row, state$column + 1][[1]]$isRed) && 
+                !(problem$kMaze[state$row, state$column][[1]][[1]]$walls$east)
+              )
     }
   )
 
@@ -65,7 +74,12 @@ is.applicable <- function (state, action, problem){
 # Must return the state resulting on applying the action over the state
 effect = function (state,action){
   result = state
-  # <insert code here in order to modify the resulting state>
+  result <- switch (action,
+      up = {
+        result$column = result$column + 1
+      }
+    )
+  print()
   return(result)
 }
 
