@@ -29,11 +29,6 @@ initialize.problem = function(csv.directory, rows, columns){
   # problem$<aditional info> = <Insert code here>
   csv = read.csv(csv.directory, header = FALSE)
   problem$kMaze <- matrix(mapply(function(x, n, s, w, e) list(list(isRed=x, walls=list(north=n, south=s, west=w, east=e))), csv[, 1], csv[, 2], csv[, 3], csv[, 4], csv[, 5]), nrow=rows, ncol=columns)
-  #kMazeCell <- list(isRed = TRUE, walls = list(
-  #  north = FALSE, south = FALSE, east = FALSE, west = FALSE
-  #))
-  #problem$kMaze <- matrix(list(kMazeCell), nrow = 2, ncol = 2)
-  #problem$kMaze[1, 1][[1]]$isRed = FALSE
   return(problem)
 }
 
@@ -41,7 +36,6 @@ initialize.problem = function(csv.directory, rows, columns){
 # Must return TRUE or FALSE according with if the action can be done or not
 # over the specific state
 is.applicable <- function (state, action, problem){
-  # print(problem$kMaze[state$row, state$column][[1]][[1]])
   result <- switch (action,
     up = {
       if (state$row == 1) return (FALSE)
