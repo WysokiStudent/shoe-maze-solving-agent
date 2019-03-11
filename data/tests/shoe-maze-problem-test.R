@@ -56,34 +56,52 @@ test_that("Are possible actions well defined", {
 test_that("Does 'is.applicable' check the conditions properly", {
   problem <- GetProblem()
 
-  kMazeCell <- problem$kMaze[1, 1][[1]]
-  kMazeCell$isRed <- TRUE
+  maze.cell <- problem$kMaze[1, 1][[1]]
+  maze.cell$isRed <- TRUE
 
   # No walls but wrong colors
-  kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (FALSE)})
-  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
+  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (FALSE)})
+  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
   kState <- list(row=2, column=2)
   for (direction in problem$actions.possible[, ])
     expect_false(is.applicable(kState, direction, problem))
 
   # Walls and wrong colors
-  kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (TRUE)})
-  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
+  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (TRUE)})
+  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
   for (direction in problem$actions.possible[, ])
     expect_false(is.applicable(kState, direction, problem))
 
   # No walls and correct colors
-  kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (FALSE)})
-  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
+  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (FALSE)})
+  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
   problem$kMaze[kState$row, kState$column][[1]]$isRed <- FALSE
   for (direction in problem$actions.possible[, ])
     expect_true(is.applicable(kState, direction, problem))
 
   # Walls and correct colors
-  kMazeCell$walls <- lapply(kMazeCell$walls, function(x) {return (TRUE)})
-  problem$kMaze <- matrix(list(kMazeCell), nrow = 3, ncol = 3)
+  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (TRUE)})
+  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
   for (direction in problem$actions.possible[, ])
     expect_false(is.applicable(kState, direction, problem))
+
+  # No walls, correct colors current cell is in the edge of the maze
+  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (FALSE)})
+  maze.cell$isRed <- TRUE
+  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
+  corner.state <- list(row=1, column=1)
+  problem$kMaze[corner.state$row, corner.state$column][[1]]$isRed = FALSE
+  expect_false(is.applicable(corner.state, "up", problem))
+  expect_true(is.applicable(corner.state, "down", problem))
+  expect_false(is.applicable(corner.state, "left", problem))
+  expect_true(is.applicable(corner.state, "right", problem))
+
+  corner.state <- list(row=3, column=3)
+  problem$kMaze[corner.state$row, corner.state$column][[1]]$isRed = FALSE
+  expect_true(is.applicable(corner.state, "up", problem))
+  expect_false(is.applicable(corner.state, "down", problem))
+  expect_true(is.applicable(corner.state, "left", problem))
+  expect_false(is.applicable(corner.state, "right", problem))
 })
 
 test_that("Does 'effect' change state properly", {
