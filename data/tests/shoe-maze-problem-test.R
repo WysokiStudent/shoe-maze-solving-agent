@@ -66,29 +66,12 @@ test_that("Does 'is.applicable' check the conditions properly", {
   for (direction in problem$actions.possible[, ])
     expect_false(is.applicable(kState, direction, problem))
 
-  # Walls and wrong colors
-  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (TRUE)})
-  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
-  for (direction in problem$actions.possible[, ])
-    expect_false(is.applicable(kState, direction, problem))
-
   # No walls and correct colors
-  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (FALSE)})
-  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
   problem$kMaze[kState$row, kState$column][[1]]$isRed <- FALSE
   for (direction in problem$actions.possible[, ])
     expect_true(is.applicable(kState, direction, problem))
 
-  # Walls and correct colors
-  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (TRUE)})
-  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
-  for (direction in problem$actions.possible[, ])
-    expect_false(is.applicable(kState, direction, problem))
-
   # No walls, correct colors current cell is in the edge of the maze
-  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (FALSE)})
-  maze.cell$isRed <- TRUE
-  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
   corner.state <- list(row=1, column=1)
   problem$kMaze[corner.state$row, corner.state$column][[1]]$isRed = FALSE
   expect_false(is.applicable(corner.state, "up", problem))
@@ -102,6 +85,20 @@ test_that("Does 'is.applicable' check the conditions properly", {
   expect_false(is.applicable(corner.state, "down", problem))
   expect_true(is.applicable(corner.state, "left", problem))
   expect_false(is.applicable(corner.state, "right", problem))
+
+  # Walls and wrong colors
+  maze.cell$isRed = TRUE
+  maze.cell$walls <- lapply(maze.cell$walls, function(x) {return (TRUE)})
+  problem$kMaze <- matrix(list(maze.cell), nrow = 3, ncol = 3)
+  corner.state = list(row = 2, column = 2)
+  for (direction in problem$actions.possible[, ])
+    expect_false(is.applicable(kState, direction, problem))
+
+  # Walls and correct colors
+  problem$kMaze[corner.state$row, corner.state$column][[1]]$isRed = FALSE
+  for (direction in problem$actions.possible[, ])
+    expect_false(is.applicable(kState, direction, problem))
+
 })
 
 test_that("Does 'effect' change state properly", {
