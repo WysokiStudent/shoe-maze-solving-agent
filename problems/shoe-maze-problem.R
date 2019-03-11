@@ -37,7 +37,7 @@ initialize.problem = function(csv.directory, rows, columns){
         ),
       csv[, 1], csv[, 2], csv[, 3], csv[, 4], csv[, 5]
     ),
-    nrow=rows, ncol=columns
+    nrow=rows, ncol=columns, byrow = TRUE
   )
   problem$state.initial <- list(row = rows, column = 1)
   problem$state.final <- list(row = 1, column = columns)
