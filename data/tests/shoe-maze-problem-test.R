@@ -18,8 +18,8 @@ test_that("Is kMaze not empty", {
 test_that("Are kMaze cells well defined", {
   problem <- GetProblem()
 
-  for (r in nrow(problem$kMaze))
-    for (c in ncol(problem$kMaze)) {
+  for (r in 1:nrow(problem$kMaze))
+    for (c in 1:ncol(problem$kMaze)) {
       expect_true(is.logical(problem$kMaze[r, c][[1]]$isRed))
       expect_true(is.list(problem$kMaze[r, c][[1]]$walls))
 
